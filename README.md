@@ -1,12 +1,12 @@
-# Health Insurance Database — MySQL
+# Health Insurance Database - MySQL
 
-Modélisation d'une base de données de mutuelle santé : contrats, sinistres, remboursements et primes sur une année complète, avec application stricte des règles métier réelles (plafond annuel de remboursement, franchise, taux de remboursement par catégorie de soin). 17 requêtes analytiques organisées en deux domaines — gestion des sinistres et pilotage du portefeuille de contrats — validées par une suite de tests automatisés.
+Modélisation d'une base de données de mutuelle santé : contrats, sinistres, remboursements et primes sur une année complète, avec application stricte des règles métier réelles (plafond annuel de remboursement, franchise, taux de remboursement par catégorie de soin). 17 requêtes analytiques organisées en deux domaines - gestion des sinistres et pilotage du portefeuille de contrats - validées par une suite de tests automatisés.
 
 ---
 
 ## Pourquoi ce projet
 
-L'assurance santé est un cas d'école pour la modélisation relationnelle : un contrat couvre un assuré et ses ayants droit, chaque soin appartient à une catégorie avec son propre taux de remboursement, et chaque contrat est soumis à un plafond annuel qui doit être respecté de façon stricte sinistre après sinistre. Ce projet implémente cette logique dans le générateur de données lui-même — un sinistre n'est remboursé que si le plafond n'est pas atteint, et un test automatisé vérifie qu'aucune police n'a jamais été remboursée au-delà de sa limite contractuelle.
+L'assurance santé est un cas d'école pour la modélisation relationnelle : un contrat couvre un assuré et ses ayants droit, chaque soin appartient à une catégorie avec son propre taux de remboursement, et chaque contrat est soumis à un plafond annuel qui doit être respecté de façon stricte sinistre après sinistre. Ce projet implémente cette logique dans le générateur de données lui-même - un sinistre n'est remboursé que si le plafond n'est pas atteint, et un test automatisé vérifie qu'aucune police n'a jamais été remboursée au-delà de sa limite contractuelle.
 
 ---
 
@@ -17,8 +17,8 @@ health-insurance-db/
 ├── 01_schema.sql                       # 9 tables, contraintes FK, index analytiques
 ├── 02_seed_data.sql                    # 1147 sinistres / 852 remboursements / 200 contrats
 ├── generate_seed.py                    # Génération des données avec logique de plafond (seed fixe)
-├── queries_01_claims_analytics.sql     # 10 requêtes — sinistres, taux d'approbation, saisonnalité
-├── queries_02_policy_portfolio.sql     # 9 requêtes — loss ratio, churn, segmentation contrats
+├── queries_01_claims_analytics.sql     # 10 requêtes - sinistres, taux d'approbation, saisonnalité
+├── queries_02_policy_portfolio.sql     # 9 requêtes - loss ratio, churn, segmentation contrats
 ├── run_tests.sh                        # Suite de 18 tests automatisés avec assertions
 └── README.md
 ```
@@ -42,7 +42,7 @@ health-insurance-db/
 
 **Règles métier intégrées au générateur de données :**
 
-- Un sinistre n'est remboursé qu'à hauteur du plafond annuel restant du contrat — au-delà, il est automatiquement rejeté avec le motif *"Plafond annuel de remboursement atteint"*
+- Un sinistre n'est remboursé qu'à hauteur du plafond annuel restant du contrat - au-delà, il est automatiquement rejeté avec le motif *"Plafond annuel de remboursement atteint"*
 - La franchise du contrat est déduite avant application du taux de remboursement
 - Les contrats Famille+ et certains Premium ont des ayants droit ; les autres formules n'en ont pas
 - Saisonnalité hivernale réaliste (pic de sinistres en janvier-février, creux en août)
@@ -110,7 +110,7 @@ Le test le plus significatif vérifie la règle métier centrale du domaine :
 
 | Formule | Loss ratio | Lecture |
 |---------|-----------|---------|
-| Essentiel | 268,3 % | Fortement déficitaire — l'assureur paie 2,68 € pour 1 € de prime |
+| Essentiel | 268,3 % | Fortement déficitaire - l'assureur paie 2,68 € pour 1 € de prime |
 | Confort | 234,1 % | Déficitaire |
 | Premium | 139,9 % | Déficitaire mais dans une moindre mesure |
 | Famille+ | 64,7 % | Rentable |
